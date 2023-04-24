@@ -1,0 +1,165 @@
+{
+    "NewsRoomMenu" : {
+        "constructor" : {
+            "driver_path"   : "C:/Users/User/Youtube/config/chromedriver.exe",
+            "max_wait_time" : 100
+        },
+        "settings_method" : {
+            "region_dict" : {
+                "Global"        : ["Global"],
+                "Africa"        : ["Algeria", "Egypt", "Morocco", "South_africa", "Tunisia"],
+                "Asia-Pacific"  : ["Australia", "India", "Indonesia", "Korea", "Malaysia", "Philippines", "Singapore", "Taiwan", "Thailand", "Vietnam"],
+                "Europe"        : ["Austria", "Belgium", "Czech_republic", "France", "Germany", "Italy", "Kazakhstan", "Netherlands", "Norway", "Poland", "Romania", "Russia", "Spain", "Sweden", "Switzerland", "Spain", "Turkiye", "Ukraine", "Uk", "Uzbekistan"],
+                "Latin America" : ["Argentina", "Brazil", "Chile", "Colombia", "Dominican_republic", "Ecuador", "El_salvador", "Guatemala", "Honduras", "Mexico", "Nicaragua", "Panama", "Peru", "Puerto_rico", "Venezuela", "Costa_rica"],
+                "Middle East"   : ["Iraq", "Jordan", "Kuwait", "Saudi_arabia", "Uae"],
+                "North America" : ["Canada", "Usa"]
+            },
+            "replace_dict" : {
+                "UAE"                : "Uae",
+                "USA"                : "Usa", 
+                "North America"      : "North_america",
+                "South Africa"       : "South_africa",
+                "U.K."               : "Uk",
+                "Czech Republic"     : "Czech_republic",
+                "El Salvador"        : "El_salvador",
+                "Puerto Rico"        : "Puerto_rico",
+                "Saudi Arabia"       : "Saudi_arabia",
+                "Costa Rica"         : "Costa_rica", 
+                "Dominican Republic" : "Dominican_republic"
+            },
+            "url_num_dict" : {
+                "2" : 6,
+                "3" : 12,
+                "4" : 22,
+                "5" : 17, 
+                "6" : 6, 
+                "7" : 4
+            },
+            "url_link" : "https://news.samsung.com/global/select-newsroom"
+        }
+    },
+    "GetBaseData" : {
+        "base_data_settings" : {
+            "press_release_url"   : "https://www.samsungmobilepress.com/press-releases/page/{}?order=newest&filter=all&keyword=", 
+            "feature_stories_url" : "https://www.samsungmobilepress.com/feature-stories/page/{}?order=newest&filter=all&keyword=",
+            "page_numbers"        : 2
+        }
+    },
+    "GetPageArticles" : {
+        "base_settings" : {
+            "switch_dict" : {
+                "press-resources" : {
+                    "US"    : "press-resources",
+                    "Other" : "category/press-resources",
+                    "MX"    : "category/materiales-de-prensa",
+                    "KR"    : "category/프레스센터"
+                },
+                "corporate" : {
+                    "US"    : "corporate",
+                    "Other" : "category/corporate",
+                    "MX"    : "category/corporativo",
+                    "KR"    : "category/기업"
+                },
+                "views" : {
+                    "US"    : "press-resources",
+                    "Other" : "category/views",
+                    "MX"    : "category/overview"
+                },
+                "products" : {
+                    "US"    : "press-resources",
+                    "Other" : "category/products",
+                    "MX"    : "category/products",
+                    "KR"    : "category/제품"
+                }
+            },
+            "special_switch" : {
+                "latin_mena" : {
+                    "latin"    : ["ecuador", "costa-rica", "el-salvador", "guatemala", "honduras", "nicaragua", "panama", "puerto-rico", "dominican-republic", "venezuela"],
+                    "mena"     : ["algeria", "egypt", "iraq", "jordan", "kuwait", "morocco", "saudi-arabia", "tunisia", "united-arab-emirates"]
+                },
+                "ph_sg_cz" : "https://news.samsung.com/{}/category/insights",
+                "it"       : "https://news.samsung.com/{}/category/b2b"
+            },
+            "logic_switch" : {
+                "logic_1" : ["us"],
+                "logic_2" : ["pl", "latin", "cl", "pe", "bharat", "th", "ua", "kz_ru", "co"],
+                "logic_3" : {
+                    "countries" : [
+                        "uz_uz", "mena", "sg", "it", "no", "global", "za", "uk", "at", "cz", "se", 
+                        "ch_fr", "vn", "br", "ph", "ar", "ca_fr", "tw", "de", "be_fr", "ch", "ru",
+                        "my", "es", "ro", "fr", "ca", "nl", "mx", "kr", "tr", "au", "id", "be", "in"
+                    ],
+                    "title_names" : [
+                        "Tiskové zprávy", "Communiqués", "Comunicate de presă", "Communiqués de Presse",
+                        "Comunicati stampa", "Comunicados de Prensa", "Persberichten", "Siaran Pers",
+                        "Pressemitteilungen", "Basın Bültenleri", "Pressemeldinger", "新聞稿", "보도자료",
+                        "Notas de Prensa", "Mitteilungen", "Notas de Prensa", "Press-relizlar", "Communiqué de presse",
+                        "الأخبار الصحفية", "Thông cáo báo chí", "Pressmeddelanden", "Press Release"
+                    ]
+                }
+            },
+            "parse_dict" : {
+                "dd-mm-yyyy" : [
+                    "cz", "ro", "ch_fr", "id", "sg", "at", "tr", "no", "ch", "ph", 
+                    "uz_uz", "vn", "se", "tw", "kz_ru", "de", "fr", "latin", "cl", 
+                    "th", "mx", "be_fr", "it", "ru", "be", "ar", "ua", "ca", "nl", 
+                    "pl", "br", "bharat", "es", "co", "in", "my", "ca_fr", "pe", "za"               
+                ],
+                "dd-mmm-yy" : ["uk", "au", "global"]
+            },
+            "article_limit" : 50,
+            "us_limit"      : 20
+        }
+    },
+    "SimilarityAnalysis" : {
+        "similarity_analysis_settings" : {
+            "model_string"         : "C:/Users/User/Youtube/config",  
+            "filters_by_countries" : {
+                "sim_03_token_30" :{
+                    "countries"  : ["kr"],
+                    "thresholds" : [0.3, 30]
+                },
+                "sim_05_token_50" : {
+                    "countries"  : ["br", "id"], 
+                    "thresholds" : [0.5, 50]
+                },
+                "sim_05_token_55" : {
+                    "countries"  : ["vn",  "ca_fr", "be_fr", "fr", "ch_fr"],
+                    "thresholds" : [0.5, 55]
+                },
+                "sim_055_token_50" : {
+                    "countries"  : ["pl", "no", "cz"],
+                    "thresholds" : [0.55, 50]
+                },
+                "sim_06_token_55" : {
+                    "countries"  : ["se"], 
+                    "thresholds" : [0.6, 55]
+                },
+                "sim_065_token_60" : {
+                    "countries"  : ["ro"], 
+                    "thresholds" : [0.65, 60]
+                }, 
+                "sim_06_token_60" : {
+                    "countries"  : ["bharat", "th", "tr", "tw"],
+                    "thresholds" : [0.6, 60]
+                }, 
+                "sim_06_token_65" : {
+                    "countries"  : ["mena", "mx", "nl", "be", "de", "ch", "at", "es", "ar", "cl", "it", "co", "latin", "pe", "ru", "kz_ru", "ua", "uz_uz"], 
+                    "thresholds" : [0.6, 65]
+                },
+                "sim_07_token_70" : {
+                    "countries"  : ["my", "ph", "za", "sg", "au", "global", "in", "uk", "us", "ca"], 
+                    "thresholds" : [0.7, 65]
+                }
+            }
+        },
+        "save_files" : {
+            "output_filename" : "./data/{}_SMP_Global_Evaluation.xlsx"
+        }
+    },
+    "FinalizedOutput" : {
+        "save_output" : {
+            "output_filename" : "./data/{}_NewsRoom_Upload_Status.xlsx"
+        }
+    }
+}
