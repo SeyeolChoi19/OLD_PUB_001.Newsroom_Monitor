@@ -1,0 +1,17 @@
+{
+    "GmailAPI": {
+        "constructor": {
+            "secret_json_filename": "C:/Users/User/Youtube/config/client_secret_758651627849-hf13b9bki5pk0v230r30ocqkhvctq95r.apps.googleusercontent.com.json",
+            "token_filename": "C:/Users/User/Youtube/config/token.pickle"
+        },
+        "gmail_settings": {
+            "personal_address": "seyeol.choi@samsung.com",
+            "destination_address": "seyeol.choi@samsung.com",
+            "subject_object": "GMAIL_API_TEST",
+            "messages": "mail_body",
+            "attachment_filenames": [
+                "C:/Users/User/Downloads/Members 작업(남인 수석님 전달).zip"
+            ]
+        }
+    }
+}
