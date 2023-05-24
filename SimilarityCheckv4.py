@@ -32,9 +32,8 @@ class SimilarityAnalysis(GetPageArticles):
         self.base_data_urls       = list(self.base_dataframe["urls"])
         self.base_date_values     = list(self.base_dataframe["dates"])
         self.model_corpus_data    = self.nlp_model_object.encode(self.base_data_titles, convert_to_tensor = True, normalize_embeddings = True)
-        
-        self.base_dataframe = self.base_dataframe.rename(columns = {"title" : "smp_title", "dates" : "smp_dates"})
-        self.complete_data  = self.complete_data.rename(columns = {"title" : "global_title", "dates" : "global_dates"})
+        self.base_dataframe       = self.base_dataframe.rename(columns = {"title" : "smp_title", "dates" : "smp_dates"})
+        self.complete_data        = self.complete_data.rename(columns = {"title" : "global_title", "dates" : "global_dates"})
       
     def get_tag_similarity_analysis(self):   
         def get_match_score(global_string: str) -> pd.Series([str, str, str, float, int]): 
@@ -93,7 +92,7 @@ class SimilarityAnalysis(GetPageArticles):
             df = df.rename(columns = {"region" : "newspage_region"})
 
             df["url_region"] = df['urls'].str.split("/").str[3]
-            df["list_index"] = list(range(1, len(df) + 1))
+            df["list_index"] = [str(i).zfill(3) for i in list(range(1, len(df) + 1))]
 
             return df
 
@@ -125,3 +124,5 @@ if __name__ == "__main__":
     sa.get_tag_similarity_analysis()
     sa.add_filters()
     sa.save_files(**GetPageArticles.config_dict["SimilarityAnalysis"]["save_files"])
+
+    
