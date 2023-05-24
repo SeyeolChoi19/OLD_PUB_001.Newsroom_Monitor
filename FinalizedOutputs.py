@@ -35,8 +35,8 @@ class FinalizedOutputs(SimilarityAnalysis):
         for (title, date) in zip(list(self.smp_data["smp_title"]), list(self.smp_data["smp_dates"])):
             inner_data = inner_func(title, date)
             base_data  = pd.merge(self.output_df.astype(str), inner_data.astype(str), how = "left", on = "url_region").astype(str).fillna("-")
-            base_data  = base_data[["newspage_region", "country", "language", "urls", "url_region", "nlp_yn", "nlp_dates", "nlp_date_difference", "nlp_urls"]]
-            self.outer_list.append(base_data)
+            base_data  = base_data[["list_index", "newspage_region", "country", "language", "urls", "url_region", "nlp_yn", "nlp_dates", "nlp_date_difference", "nlp_urls"]]
+            self.outer_list.append(base_data.sort_values(by = "list_index"))
 
     def create_excel_sheets(self):
         def inner_func1(data: pd.core.frame.DataFrame):
@@ -51,14 +51,12 @@ class FinalizedOutputs(SimilarityAnalysis):
             return data1
 
         def inner_func2(data1: pd.core.frame.DataFrame, title: str, date: str, url: str, data):
-            data1.loc[0] = ["smp_title : "]             + [""] + [""] + [title] + ["" for i in range(len(data.columns) - 4)]
-            data1.loc[1] = ["upload_date : "]           + [""] + [""] + [date]  + ["" for i in range(len(data.columns) - 4)]
-            data1.loc[2] = ["upload_url : "]            + [""] + [""] + [url]   + ["" for i in range(len(data.columns) - 4)]
-            data1.loc[3] = ["validation_start_time : "] + [""] + [""] + [str(self.start_time)[0:19]]   + ["" for i in range(len(data1.columns) - 4)]
-            data1.loc[4] = ["validation_end_time : "]   + [""] + [""] + [str(dt.datetime.now())[0:19]] + ["" for i in range(len(data1.columns) - 4)]
-            data1.loc[5] = ["total_time : "]            + [""] + [""] + [f"{round((dt.datetime.now() - self.start_time).total_seconds() / 60)} minutes"] + ["" for i in range(len(data1.columns) - 4)]
+            data1.loc[0] = ["smp_title : "]   + [""] + [""] + [title] + ["" for i in range(len(data.columns) - 4)]
+            data1.loc[1] = ["upload_date : "] + [""] + [""] + [date]  + ["" for i in range(len(data.columns) - 4)]
+            data1.loc[2] = ["upload_url : "]  + [""] + [""] + [url]   + ["" for i in range(len(data.columns) - 4)]
+            data1.loc[3] = ["total_time : "]  + [""] + [""] + [f"{round((dt.datetime.now() - self.start_time).total_seconds() / 60)} minutes"] + ["" for i in range(len(data1.columns) - 4)]
 
-            counter = 6
+            counter = 4
 
             for (key, value) in self.validation.items():
                 if (len(data[data["url_region"] == key]) != value):
@@ -75,8 +73,8 @@ class FinalizedOutputs(SimilarityAnalysis):
             data1 = inner_func2(data1, title, date, url, data)
             data1.columns = ["" for i in data1.columns]
 
-            data1.iloc[:, 5]   = data1.iloc[:, 5].replace("nan", "X")
-            data1.iloc[:, 6:9] = data1.iloc[:, 6:9].replace("nan", "-") 
+            data1.iloc[:, 6]    = data1.iloc[:, 6].replace("nan", "X")
+            data1.iloc[:, 7:10] = data1.iloc[:, 7:10].replace("nan", "-") 
 
             self.outer_list[index] = data1
 
