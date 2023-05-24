@@ -21,7 +21,7 @@ class NewsRoomMenu:
                 driver_path   : String variable, the full path of the chrome webdriver executable
                 max_wait_time : Integer variable, the number of seconds the program should wait before throwing an error when scraping data with selenium
         """
-        self.driver_path    = driver_path
+        self.driver_path   = driver_path
         self.max_wait_time = max_wait_time 
 
     def settings_method(self, region_dict: dict, replace_dict: dict, url_num_dict: dict, url_link: str):
