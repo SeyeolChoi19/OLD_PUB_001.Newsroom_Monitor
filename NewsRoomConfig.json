@@ -107,8 +107,8 @@
                 ],
                 "dd-mmm-yy" : ["uk", "au", "global"]
             },
-            "article_limit" : 50,
-            "us_limit"      : 20
+            "article_limit" : 25,
+            "us_limit"      : 25
         }
     },
     "SimilarityAnalysis" : {
@@ -117,7 +117,7 @@
             "filters_by_countries" : {
                 "sim_03_token_30" :{
                     "countries"  : ["kr"],
-                    "thresholds" : [0.3, 30]
+                    "thresholds" : [0.5, 50]
                 },
                 "sim_05_token_50" : {
                     "countries"  : ["br", "id"], 
@@ -140,13 +140,9 @@
                     "thresholds" : [0.65, 60]
                 }, 
                 "sim_06_token_60" : {
-                    "countries"  : ["bharat", "th", "tr", "tw"],
+                    "countries"  : ["bharat", "th", "tr", "tw", "mena", "mx", "nl", "be", "de", "ch", "at", "es", "ar", "cl", "it", "co", "latin", "pe", "ru", "kz_ru", "ua", "uz_uz"],
                     "thresholds" : [0.6, 60]
                 }, 
-                "sim_06_token_65" : {
-                    "countries"  : ["mena", "mx", "nl", "be", "de", "ch", "at", "es", "ar", "cl", "it", "co", "latin", "pe", "ru", "kz_ru", "ua", "uz_uz"], 
-                    "thresholds" : [0.6, 65]
-                },
                 "sim_07_token_70" : {
                     "countries"  : ["my", "ph", "za", "sg", "au", "global", "in", "uk", "us", "ca"], 
                     "thresholds" : [0.7, 65]
