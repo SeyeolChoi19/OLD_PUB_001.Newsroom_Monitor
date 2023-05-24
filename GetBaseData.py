@@ -30,9 +30,9 @@ class GetBaseData(NewsRoomMenu):
         self.date_limit          = input("Input date in YYYY-MM-DD format")
 
         self.base_url_data = {
-            "title"             : [],
-            "dates"             : [],
-            "urls"              : []
+            "title" : [],
+            "dates" : [],
+            "urls"  : []
         }
 
     def get_feature_release_urls(self):      
