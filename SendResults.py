@@ -34,11 +34,12 @@ def get_outputs(configDict):
 def run_function(config_dict: dict) -> None:
     try:
         get_outputs(config_dict)
-    except:
+    except Exception as e:
+        print(e)
         run_function(config_dict)
 
 if __name__ == "__main__":
     with open("./config/gmail_api_config.json", "r") as f:
         config_dict = json.load(f)
         
-    get_outputs(config_dict)
+    run_function(config_dict)
