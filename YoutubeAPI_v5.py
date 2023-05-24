@@ -180,8 +180,14 @@ class GetYoutubeData:
 
             try:
                 htag_count, htag_string = get_hashtags1(self.response)
-            except Exception:
-                htag_count, htag_string = get_hashtags2(self.response)
+                try:
+                    htag_count, htag_string = get_hashtags2(self.response)
+                except:
+                    htag_count  = 0
+                    htag_string = ""
+            except:
+                htag_count  = 0
+                htag_string = ""
 
             keys    = ["video_likes", "comment_no", "total_engagements", "view_count", "video_tags", "number_of_video_tags", "video_htags", "number_of_video_htags"]
             results = [likes, comments, engagements, views, tag_string, tag_count, htag_string.replace("#", ""), htag_count]
@@ -251,9 +257,16 @@ class GetYoutubeData:
         """
         self.video_stats.to_excel(os.path.join(self.output_path, stats_file_name.format(self.current_date)), index = False, encoding = "utf-8-sig")
         self.vid_comments.to_excel(os.path.join(self.output_path, comments_file_name.format(self.current_date)), index = False, encoding = "utf-8-sig")
-        
+
+    def youtube_search(self, search_query: str):
+        response = self.youtube_api.search().list(
+            part       = "snippet",
+            maxResults = 25,
+            q          = search_query
+        ).execute()
+
 if __name__ == "__main__":
-    with open("./config/GetDataFromSourcesConfig.json", "r", encoding = "utf-8-sig") as f:
+    with open("./config/ChanelConfig.json", "r", encoding = "utf-8-sig") as f:
         configDict = json.load(f)
 
     gyd = GetYoutubeData(**configDict["GetYoutubeData"]["constructor"])
@@ -263,4 +276,3 @@ if __name__ == "__main__":
     gyd.get_youtube_comments()
     gyd.process_files()
     gyd.save_files(**configDict["GetYoutubeData"]["save_files"])
-
